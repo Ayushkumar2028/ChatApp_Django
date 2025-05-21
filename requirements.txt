@@ -2,4 +2,4 @@ Django>=4.2
 channels>=4.0
 uvicorn[standard]>=0.22
 pillow>=10.0
- mysqlclient>=2.2
+mysqlclient>=2.2

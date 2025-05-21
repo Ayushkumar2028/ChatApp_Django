@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .secrects import get_secret
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -98,7 +98,7 @@ DATABASES = {
         'USER' : 'admin',
         "PASSWORD" : '.hqK)y-usGk9pk[xG5!?iTuG8htQ' ,
         "HOST" : 'database-1.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com' ,
-        "POST" : '3306',
+        "PORT" : '3306',
     }
 }
 
