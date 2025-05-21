@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': "chatDb",
         'USER' : "admin" ,
         'PASSWORD' : PASSWORD,
-        'HOST' : "database.cluster-ro-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
+        'HOST' : "database.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
         "PORT" : '3306'
     }
 }
