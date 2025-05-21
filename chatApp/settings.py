@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['172.20.240.1']
 
+PASSWORD = "Abhijeet178"
 
 # Application definition
 
@@ -90,15 +90,14 @@ LOGIN_URL = '/login/'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# db  =  get_secret()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database-1',
-        'USER' : 'admin',
-        "PASSWORD" : '.hqK)y-usGk9pk[xG5!?iTuG8htQ' ,
-        "HOST" : 'database-1.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com' ,
-        "PORT" : '3306',
+        'NAME': "chatDb",
+        'USER' : "admin" ,
+        'PASSWORD' : PASSWORD,
+        'HOST' : "database.cluster-ro-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
+        "PORT" : '3306'
     }
 }
 
