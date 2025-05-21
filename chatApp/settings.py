@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from .secrects import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-ei#%y-rm=%oac&+b92#(&$5*su24144ji#%1qpav!w$x0s1z*0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.20.240.1']
 
 
 # Application definition
@@ -89,10 +90,15 @@ LOGIN_URL = '/login/'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# db  =  get_secret()
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'database-1',
+        'USER' : 'admin',
+        "PASSWORD" : '.hqK)y-usGk9pk[xG5!?iTuG8htQ' ,
+        "HOST" : 'database-1.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com' ,
+        "POST" : '3306',
     }
 }
 
