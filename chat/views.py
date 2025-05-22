@@ -68,6 +68,10 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth.models import User
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Q
+
 @login_required
 def search(request):
     query = request.GET.get('q', '')
@@ -76,12 +80,13 @@ def search(request):
     if query:
         users = User.objects.filter(
             Q(username__icontains=query) |
-            Q(email__icontains=query) |  # user.email
-            Q(userinfo__name__icontains=query) |  # UserInfo.name
-            Q(userinfo__email__icontains=query)    # UserInfo.email
-        )
-    print(users)
+            Q(email__icontains=query) |
+            Q(userinfo__name__icontains=query) |
+            Q(userinfo__email__icontains=query)
+        ).exclude(id=request.user.id).distinct()
+
     return render(request, 'chat/search.html', {'query': query, 'users': users})
+
 
 
 @login_required
