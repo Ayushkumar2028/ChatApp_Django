@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,8 +29,6 @@ SECRET_KEY = 'django-insecure-ei#%y-rm=%oac&+b92#(&$5*su24144ji#%1qpav!w$x0s1z*0
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
-PASSWORD = "Abhijeet178"
 
 # Application definition
 
@@ -92,12 +92,12 @@ LOGIN_URL = '/login/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -141,5 +141,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DATABASES = {
+    'default': dj_database_url.parse(
+       'postgresql://postgres.savttbboqhsxctkiftre:Abhijeet@178@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres'
+    )
+}
 
 
