@@ -91,16 +91,7 @@ LOGIN_URL = '/login/'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': "chatDb",
-#         'USER' : "admin" ,
-#         'PASSWORD' : PASSWORD,
-#         'HOST' : "database.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
-#         "PORT" : '3306'
-#     }
-# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
