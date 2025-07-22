@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-ei#%y-rm=%oac&+b92#(&$5*su24144ji#%1qpav!w$x0s1z*0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.20.240.1' , '13.53.200.17'  , '51.20.1.155']
+ALLOWED_HOSTS = ["*"]
 
 PASSWORD = "Abhijeet178"
 
@@ -90,14 +91,20 @@ LOGIN_URL = '/login/'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': "chatDb",
+#         'USER' : "admin" ,
+#         'PASSWORD' : PASSWORD,
+#         'HOST' : "database.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
+#         "PORT" : '3306'
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "chatDb",
-        'USER' : "admin" ,
-        'PASSWORD' : PASSWORD,
-        'HOST' : "database.cluster-cd4660c2uk4d.eu-north-1.rds.amazonaws.com" ,
-        "PORT" : '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -142,3 +149,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+

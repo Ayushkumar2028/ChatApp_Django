@@ -3,6 +3,8 @@ import json
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
+
+# ws://localhost:8000/ws/chat/123/ → room_id = 123
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_id = self.scope['url_route']['kwargs']['room_id']
@@ -27,6 +29,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         username = data['username']
         room_id = data['room_id']
 
+        # these are user defined
         user = await self.get_user(username)
         room =  await  self.get_room(room_id)
 
@@ -50,6 +53,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @staticmethod
     @database_sync_to_async
     def save_message(room, user, message):
+        #lazy import
         from .models import Message
         Message.objects.create(chatroom=room, sender=user, content=message)
 
