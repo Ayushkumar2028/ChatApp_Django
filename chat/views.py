@@ -9,45 +9,44 @@ from .models import UserInfo, ChatRoom, Message
 
 
 # Create your views here.
-def register(request) :
-    if request.method  ==  'POST' :
-        username =  request.POST['username']
-        password =  request.POST['password']
-        name  =  request.POST['name']
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        name = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phone']
-        image  = request.FILES.get('image')
+        image = request.FILES.get('image')
 
-        if User.objects.filter(username = username).exists()  :
-            messages.error(request , "Username already taken")
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken")
             return redirect('register')
 
-        user  =  User.objects.create_user(username= username ,  password = password)
-        user_info =  UserInfo.objects.create(user  =  user  ,  name  =  name  ,  email =  email  ,  phone  = phone  ,  image  =  image)
+        user = User.objects.create_user(username=username, password=password)
+        user_info = UserInfo.objects.create(user=user, name=name, email=email, phone=phone, image=image)
         user.save()
         user_info.save()
-        login(request  , user)
-        messages.success(request ,  "Registration successful")
-        return  redirect('index')
+        login(request, user)
+        messages.success(request, "Registration successful")
+        return redirect('index')
 
-    return render(request ,  'chat/register.html')
+    return render(request, 'chat/register.html')
 
 
-def loginView(request) :
-    if request.method  ==  'POST' :
-        username =  request.POST['username']
-        password =  request.POST['password']
+def loginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
-        user  = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user:
-            login(request  , user)
+            login(request, user)
             return redirect('index')
-        else  :
-            messages.error(request , "Invalid username or Password")
+        else:
+            messages.error(request, "Invalid username or Password")
 
-    return render(request , 'chat/login.html')
-
+    return render(request, 'chat/login.html')
 
 
 @login_required
@@ -72,6 +71,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+
 @login_required
 def search(request):
     query = request.GET.get('q', '')
@@ -88,34 +88,33 @@ def search(request):
     return render(request, 'chat/search.html', {'query': query, 'users': users})
 
 
-
 @login_required
-def chatroom(request ,  id) :
-    room  =  get_object_or_404(ChatRoom , id =  id)
+def chatroom(request, id):
+    room = get_object_or_404(ChatRoom, id=id)
 
-    if request.user not in room.participants.all() :
+    if request.user not in room.participants.all():
         return redirect('index')
-    messages =  room.messages.all()
+    messages = room.messages.all()
     print(messages)
-    return render(request ,  'chat/chatroom.html' ,  {
-        'room' : room , 'messages' : messages
+    return render(request, 'chat/chatroom.html', {
+        'room': room, 'messages': messages
     })
 
 
 @login_required
-def add_user_to_chatroom(request  , user_id) :
-    reciver  =  User.objects.get(id =  user_id)
+def add_user_to_chatroom(request, user_id):
+    reciver = User.objects.get(id=user_id)
     sender = request.user
 
-    chatroom = ChatRoom.objects.filter(participants = sender).filter(participants = reciver)
+    chatroom = ChatRoom.objects.filter(participants=sender).filter(participants=reciver)
 
-    if not  chatroom.exists() :
-        name  = f"{reciver.username}-{sender.username}"
-        chatroom  = ChatRoom.objects.create(name  = name)
-        chatroom.participants.add(reciver ,  sender)
+    if not chatroom.exists():
+        name = f"{reciver.username}-{sender.username}"
+        chatroom = ChatRoom.objects.create(name=name)
+        chatroom.participants.add(reciver, sender)
         chatroom.save()
 
-    return redirect('chatroom' ,  id =  chatroom.id)
+    return redirect('chatroom', id=chatroom.id)
 
 
 @login_required
