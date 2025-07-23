@@ -81,9 +81,7 @@
 
     // Build WebSocket URL based on current location and room ID
     let protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    let chatSocket = new WebSocket(`${protocol}://${window.location.host}/ws/chat/{{room.id}}/`);
-
-<!--    chatSocket = new WebSocket(wsUrl);-->
+    let chatSocket = new WebSocket(`${protocol}://${window.location.host}/ws/chat/{{ room.id }}/`);
 
     chatSocket.onopen = () => {
       console.log('WebSocket connection established');
